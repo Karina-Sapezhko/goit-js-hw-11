@@ -11,11 +11,11 @@ class CountdownTimer {
   startTime() {
     setInterval(() => {
       const delteTime = this.targetDate - new Date();
-      this.addTimerMarkup(delteTime);
+      this.addTimer(delteTime);
     }, 1000);
   }
 
-  addTimerMarkup(time) {
+  addTimer(time) {
     const days = this.pad(Math.floor(time / (1000 * 60 * 60 * 24)));
     const hours = this.pad(
       Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
@@ -23,13 +23,18 @@ class CountdownTimer {
     const mins = this.pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
     const secs = this.pad(Math.floor((time % (1000 * 60)) / 1000));
 
+    this.addMarkup(days, hours, mins, secs);
+  }
+
+  pad(value) {
+    return String(value).padStart(2, "0");
+  }
+
+  addMarkup(days, hours, mins, secs) {
     this.days.textContent = days;
     this.hours.textContent = hours;
     this.mins.textContent = mins;
     this.secs.textContent = secs;
-  }
-  pad(value) {
-    return String(value).padStart(2, "0");
   }
 }
 
